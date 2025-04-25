@@ -2,10 +2,10 @@ import { errorResponse } from "../utils/response-handler.js";
 
 export const validateFeedback = async(req,res,next)=>{
     try {
-        const {username,email,feedback,category}= req.body;
+        const {name,email,message,category}= req.body;
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if(!username || !email || !feedback || !category){
+        if(!name || !email || !message || !category){
             return errorResponse(res,400,"All fields are required");
         }
 

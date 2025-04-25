@@ -5,8 +5,8 @@ const feedbackService = new FeedbackService();
 
 export const createFeedback = async(req,res)=>{
     try {
-        const {username,email,feedback,category}= req.body;
-        const response = await feedbackService.create({username,email,feedback,category});
+        const {name,email,message,category}= req.body;
+        const response = await feedbackService.create({name,email,message,category});
         return successResponse(res,201,"Feedback created successfully",response)
     } catch (error) {
         return errorResponse(res,500,"Something went wrong",error)

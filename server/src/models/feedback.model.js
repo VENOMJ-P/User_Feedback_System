@@ -5,11 +5,11 @@ const feedbackSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    username:{
+    name:{
         type:String,
         required:true
     },
-    feedback:{
+    message:{
         type:String,
         required:true
     },
