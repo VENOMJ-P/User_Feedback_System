@@ -5,7 +5,6 @@ const feedbackService = new FeedbackService();
 
 export const createFeedback = async(req,res)=>{
     try {
-        console.log("recadf")
         const {username,email,feedback,category}= req.body;
         const response = await feedbackService.create({username,email,feedback,category});
         return successResponse(res,201,"Feedback created successfully",response)

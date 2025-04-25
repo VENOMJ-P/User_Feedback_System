@@ -7,7 +7,6 @@ class FeedbackService{
 
     async create(data){
         try {
-            console.log("recieved")
             const feedback= await this.feedbackRepository.create(data);
             return feedback
         } catch (error) {
