@@ -15,15 +15,15 @@ class FeedbackService{
         }
     }
 
-    async getAll(){
+    async getAll(filters = {}, pagination = {}) {
         try {
-            const feedbacks= await this.feedbackRepository.getAll();
-            return feedbacks
+          const feedbacks = await this.feedbackRepository.getAll(filters, pagination);
+          return feedbacks;
         } catch (error) {
-            console.log("Something went wrong in feedback service");
-            throw error;
+          console.error("Error in feedbackService.getAll:", error);
+          throw error;
         }
-    }
+      }
 }
 
 export default FeedbackService;

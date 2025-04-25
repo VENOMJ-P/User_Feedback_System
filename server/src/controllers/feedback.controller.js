@@ -13,11 +13,27 @@ export const createFeedback = async(req,res)=>{
     }
 }
 
-export const getFeedbacks = async(req,res)=>{
+export const getFeedbacks = async (req, res) => {
     try {
-        const response = await feedbackService.getAll();
-        return successResponse(res,201,"Successfully get all feedbacks",response)
+      const { category, name,email, sortBy = 'createdAt', order = 'desc', page = 1, limit = 10 } = req.query;
+  
+      const filters = {};
+      if (category) filters.category = category;
+      if (name) filters.name = { $regex: new RegExp(name, 'i') }; 
+      if (email) filters.email = { $regex: new RegExp(email, 'i') }; 
+  
+      const pagination = {
+        page: parseInt(page),
+        limit: parseInt(limit),
+        sort: { [sortBy]: order === 'asc' ? 1 : -1 }
+      };
+  
+      const result = await feedbackService.getAll(filters, pagination);
+      console.log(result)
+      return successResponse(res, 200, "Successfully fetched feedbacks", result);
     } catch (error) {
-        return errorResponse(res,500,"Something went wrong",error)
+      console.error("Error in getFeedbacks:", error);
+      return errorResponse(res, 500, "Something went wrong", error.message);
     }
-}
+  };
+  
